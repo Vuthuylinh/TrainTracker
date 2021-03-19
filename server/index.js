@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser');
 const app = express()
 const PORT = process.env.PORT || 8080
+const { db } = require('./db')
 
 const createApp = () => {
   // logging middleware
@@ -37,8 +38,9 @@ const startListening = () => {
     console.log(`App is running on port ${PORT}`)
   )
 }
-
+const syncDb = () => db.sync({ force: false })
 async function bootApp() {
+  await syncDb()
   await createApp()
   await startListening()
 }
