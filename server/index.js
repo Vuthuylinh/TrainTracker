@@ -1,14 +1,19 @@
 const express = require('express')
+const morgan = require('morgan')
+const path = require('path')
+const bodyParser = require('body-parser');
 const app = express()
 
-const morgan = require('morgan')
+
 // logging middleware
 app.use(morgan('dev'))
 
 // static file-serving middleware
-const path = require('path')
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
-const bodyParser = require('body-parser');
+// body parsing middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// api routes
+app.use('/api', require('./api'))
