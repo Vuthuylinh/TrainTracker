@@ -11,10 +11,15 @@ router.get('/', async (req, res, next)=> {
   }
 });
 
+router.post('/', async (req, res, next)=>{
+try {
+  const train = await Train.create(req.body)
+  res.json(train)
+} catch (error) {
+next(error)
+}
 
 
-
-// matches POST requests to /api/trains/
-router.post('/', function (req, res, next) { /* etc */});
+});
 
 module.exports = router;
