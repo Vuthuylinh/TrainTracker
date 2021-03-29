@@ -12,10 +12,10 @@ const Train = db.define('train',{
     defaultValue: "https://image.shutterstock.com/image-vector/train-260nw-104147417.jpg"
   },
   arrivalTime1:{
-    type: Sequelize.DATE
+    type:Sequelize.STRING
   },
   arrivalTime2:{
-    type: Sequelize.DATE
+    type:Sequelize.DATE
   }
 })
 
