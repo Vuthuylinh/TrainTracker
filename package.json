@@ -15,6 +15,7 @@
   "author": "linhvu",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
@@ -22,7 +23,10 @@
     "pg-hstore": "^2.3.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
     "sequelize": "^6.5.1"
   },
   "devDependencies": {
