@@ -24,9 +24,34 @@ handleClick() {
     clicked: true
   });
 }
-  render(){
+findMatchArrivalTime(time) {
+  const trains = this.props.trains
+  let arrival1 = trains.map(train=> train.arrivalTime1)
+  let arrival2 = trains.map(train =>train.arrivalTime2)
+  let arralTimeTotal = arrival1.concat(arrival2).sort()
+
+ let matchTimes=[]
+ for (let i = 0; i < arralTimeTotal.length; i++) {
+  if (arralTimeTotal[i + 1] === arralTimeTotal[i]) {
+    matchTimes.push(arralTimeTotal[i])
+  }
+}
+if(matchTimes.length===0) return "there are no trains come at the same time"
+
+for(let j=0; j<matchTimes.length; j++){
+  console.log("match time:",matchTimes)
+  if(matchTimes[j]> time){
+    return matchTimes[j]
+  }
+}
+return matchTimes[0]
+}
+
+render(){
     const trains = this.props.trains || []
-    console.log("props in Trains" , this.props)
+    let time = "8:40"
+ const something = this.findMatchArrivalTime(time)
+ console.log("something here: ",something)
     return(
       <div>
         <div className="create-button">

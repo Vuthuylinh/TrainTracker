@@ -46,20 +46,20 @@ const defaultState = {
             Arrival time 1:
             <select name ="arrivalTime1" value={this.state.arrivalTime1} onChange={this.handleChange}>
               <option value="select time"> Select time </option>
-              <option value="08:00 AM"> 08:00 AM </option>
-              <option value="09:00 AM"> 09:00 AM </option>
-              <option value="10:00 AM"> 10:00 AM </option>
-              <option value="11:00 AM"> 11:00 AM </option>
+              <option value="08:00"> 08:00 </option>
+              <option value="09:00"> 09:00 </option>
+              <option value="10:00"> 10:00 </option>
+              <option value="11:00"> 11:00 </option>
             </select>
       </label>
       <label>
             Arrival time 2:
             <select name ="arrivalTime2" value={this.state.arrivalTime2}  onChange={this.handleChange}>
               <option value="select time"> Select time </option>
-              <option value="01:30 PM"> 01:30 PM </option>
-              <option value="03:30 PM"> 02:30 PM </option>
-              <option value="01:30 PM"> 03:30 PM </option>
-              <option value="03:30 PM"> 04:30 PM </option>
+              <option value="13:30"> 13:30 </option>
+              <option value="14:30"> 14:30 </option>
+              <option value="15:30"> 15:30 </option>
+              <option value="16:30"> 16:30 </option>
             </select>
       </label>
       <button type="submit"  disabled={!this.state.name || this.state.name.length > 4 || !this.state.arrivalTime1 || !this.state.arrivalTime2}>Submit</button>
