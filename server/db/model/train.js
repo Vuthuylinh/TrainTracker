@@ -9,7 +9,7 @@ const Train = db.define('train',{
   },
   imageUrl: {
     type: Sequelize.TEXT,
-    defaultValue: "https://image.shutterstock.com/image-vector/train-260nw-104147417.jpg"
+    defaultValue:"https://www.emoji.co.uk/files/apple-emojis/travel-places-ios/509-train.png"
   },
   arrivalTime1:{
     type:Sequelize.STRING

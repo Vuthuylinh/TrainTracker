@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchTrainsThunk} from '../store/trains'
+import {fetchTrainsThunk,removeTrainThunk} from '../store/trains'
 import Train from './Train'
 import CreateTrainSchedule from './CreateTrainSchedule'
 
@@ -13,7 +13,6 @@ export class Trains extends React.Component{
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
-   // this.handleSubmit = this.handleSubmit.bind(this)
     this.findMatchArrivalTime = this.findMatchArrivalTime.bind(this)
   }
 componentDidMount(){
@@ -28,34 +27,6 @@ handleChange(event){
     [event.target.name]: event.target.value
   })
 }
-// handleSubmit(event){
-//   let inputTime= this.state.time
-
-//     const trains = this.props.trains
-//   let arrival1 = trains.map(train=> train.arrivalTime1)
-//   let arrival2 = trains.map(train =>train.arrivalTime2)
-//   let arralTimeTotal = arrival1.concat(arrival2).sort()
-
-//  let matchTimes=[]
-//  for (let i = 0; i < arralTimeTotal.length; i++) {
-//   if (arralTimeTotal[i + 1] === arralTimeTotal[i]) {
-//     matchTimes.push(arralTimeTotal[i])
-//   }
-// }
-// if(matchTimes.length===0) return crowdedTime="there are no trains come at the same time"
-
-// for(let j=0; j<matchTimes.length; j++){
-//   console.log("match time:",matchTimes)
-//   if(matchTimes[j]> inputTime){
-//     return crowdedTime= matchTimes[j]
-//   }
-// }
-// this.setState({time:""})
-// return crowdedTime=matchTimes[0]
-//   event.preventDefault();
-//   this.setState({time:""})
-
-// }
 
 handleClick() {
   this.setState({
@@ -74,12 +45,12 @@ findMatchArrivalTime(time) {
     matchTimes.push(arralTimeTotal[i])
   }
 }
-if(matchTimes.length===0) return "there are no trains come at the same time"
+if(matchTimes.length===0) return "There are no trains come at the same time"
 
 for(let j=0; j<matchTimes.length; j++){
   console.log("match time:",matchTimes)
   if(matchTimes[j]> time){
-    return "Today : " +matchTimes[j]
+    return "Today : " + matchTimes[j]
   }
 }
 return "Tomorrow : " + matchTimes[0]
@@ -103,7 +74,7 @@ let inputTime = this.state.time
                {this.state.time.length>5 || this.state.time.length <5 && inputTimeDirection && <span className="warning">{inputTimeDirection}</span>}
               <input type="text" name="time" value ={this.state.time} onChange={this.handleChange}/>
             </label>
-           
+
           </form>
 
           {this.state.time ? <h1>{something}</h1> : null}
@@ -115,7 +86,7 @@ let inputTime = this.state.time
         <div>
           <h1>Trains list</h1>
           {
-            trains.map(train =><Train train={train} key={train.id}/>)
+            trains.map(train =><Train train={train} key={train.id} deleteTrain={this.props.deleteTrain}/>)
           }
         </div>
       </div>
@@ -132,7 +103,8 @@ const mapState =(state)=>{
 
 const mapDispatch =(dispatch)=>{
   return{
-    getAllTrains: ()=> dispatch(fetchTrainsThunk())
+    getAllTrains: ()=> dispatch(fetchTrainsThunk()),
+    deleteTrain: (train)=> dispatch(removeTrainThunk(train))
   }
 }
 export default connect(mapState,mapDispatch)(Trains)

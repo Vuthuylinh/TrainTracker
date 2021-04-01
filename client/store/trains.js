@@ -2,6 +2,7 @@ import axios from 'axios'
 //action type
 const GET_TRAINS = 'GET_TRAINS'
 const ADD_TRAIN = 'ADD_TRAIN'
+const DELETE_TRAIN = 'DELETE_TRAIN'
 //action creator
 export const getTrains = trains => ({
   type: GET_TRAINS,
@@ -11,6 +12,12 @@ export const getTrains = trains => ({
 const addTrain = (train) => {
   return {
     type: ADD_TRAIN,
+    train
+  }
+}
+export const deleteTrain = (train) => {
+  return {
+    type: DELETE_TRAIN,
     train
   }
 }
@@ -38,6 +45,17 @@ export const addTrainThunk = (train) => {
   }
 }
 
+export const removeTrainThunk = (train) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/trains/${train.id}`)
+      dispatch(deleteTrain(train))
+    } catch (err) {
+      dispatch(getTrainErr(err))
+    }
+  }
+}
+
 
 const initialState = []
 
@@ -46,7 +64,9 @@ export default function trainsReducer(state = initialState, action) {
     case GET_TRAINS:
       return action.trains
     case ADD_TRAIN:
-      return [...state,action.train]
+      return [...state, action.train]
+    case DELETE_TRAIN:
+      return state.filter(train => train.id !== action.train.id)
     default:
       return state
   }

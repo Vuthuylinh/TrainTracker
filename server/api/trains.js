@@ -18,11 +18,20 @@ try {
 } catch (error) {
 next(error)
 }
-
-
 });
 
-
+router.delete('/:trainId', async (req, res, next) => {
+  try {
+    await Train.destroy({
+      where: {
+        id: req.params.trainId
+      }
+    })
+    res.status(204).end()
+  } catch (err) {
+    next(err)
+  }
+})
 
 
 
