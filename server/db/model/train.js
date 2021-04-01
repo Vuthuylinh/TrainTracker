@@ -15,7 +15,7 @@ const Train = db.define('train',{
     type:Sequelize.STRING
   },
   arrivalTime2:{
-    type:Sequelize.DATE
+    type:Sequelize.STRING
   }
 })
 

@@ -8,8 +8,8 @@ const seed = async () =>{
       {
         name:"TOMO",
         imageUrl: "https://image.shutterstock.com/image-vector/train-260nw-104147417.jpg",
-        arrivalTime1:"9:30AM",
-        arrivalTime2: new Date(2021,2,30,11,30)
+        arrivalTime1:"09:30 AM",
+        arrivalTime2:"10:30 AM"
       }
     ]
     const trainList = await Promise.all(trains.map(train => {
