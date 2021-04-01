@@ -9,10 +9,12 @@ export class Trains extends React.Component{
     super()
     this.state = {
       clicked: false,
-      time:""
+      time:''
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
+   // this.handleSubmit = this.handleSubmit.bind(this)
+    this.findMatchArrivalTime = this.findMatchArrivalTime.bind(this)
   }
 componentDidMount(){
   try {
@@ -26,40 +28,41 @@ handleChange(event){
     [event.target.name]: event.target.value
   })
 }
-handleSubmit(event){
-  let inputTime= this.state.time
-  try {
-    const trains = this.props.trains
-    let arrival1 = trains.map(train=> train.arrivalTime1)
-    let arrival2 = trains.map(train =>train.arrivalTime2)
-    let arralTimeTotal = arrival1.concat(arrival2).sort()
-    let matchTimes=[]
-    for (let i = 0; i < arralTimeTotal.length; i++) {
-     if (arralTimeTotal[i + 1] === arralTimeTotal[i]) {
-       matchTimes.push(arralTimeTotal[i])
-     }
-   }
-   if(matchTimes.length===0) return "there are no trains come at the same time"
+// handleSubmit(event){
+//   let inputTime= this.state.time
 
-   for(let j=0; j<matchTimes.length; j++){
-     console.log("match time:",matchTimes)
-     if(matchTimes[j]> inputTime){
-       return matchTimes[j]
-     }
-   }
-   return matchTimes[0]
-   event.preventDefault();
-   this.setState(defaultState)
-  } catch (error) {
-    console.error(error)
-  }
-}
+//     const trains = this.props.trains
+//   let arrival1 = trains.map(train=> train.arrivalTime1)
+//   let arrival2 = trains.map(train =>train.arrivalTime2)
+//   let arralTimeTotal = arrival1.concat(arrival2).sort()
+
+//  let matchTimes=[]
+//  for (let i = 0; i < arralTimeTotal.length; i++) {
+//   if (arralTimeTotal[i + 1] === arralTimeTotal[i]) {
+//     matchTimes.push(arralTimeTotal[i])
+//   }
+// }
+// if(matchTimes.length===0) return crowdedTime="there are no trains come at the same time"
+
+// for(let j=0; j<matchTimes.length; j++){
+//   console.log("match time:",matchTimes)
+//   if(matchTimes[j]> inputTime){
+//     return crowdedTime= matchTimes[j]
+//   }
+// }
+// this.setState({time:""})
+// return crowdedTime=matchTimes[0]
+//   event.preventDefault();
+//   this.setState({time:""})
+
+// }
+
 handleClick() {
   this.setState({
     clicked: true
   });
 }
-/*findMatchArrivalTime(time) {
+findMatchArrivalTime(time) {
   const trains = this.props.trains
   let arrival1 = trains.map(train=> train.arrivalTime1)
   let arrival2 = trains.map(train =>train.arrivalTime2)
@@ -76,30 +79,31 @@ if(matchTimes.length===0) return "there are no trains come at the same time"
 for(let j=0; j<matchTimes.length; j++){
   console.log("match time:",matchTimes)
   if(matchTimes[j]> time){
-    return matchTimes[j]
+    return "Today : " +matchTimes[j]
   }
 }
-return matchTimes[0]
+return "Tomorrow : " + matchTimes[0]
 }
-*/
+
 render(){
 const trains = this.props.trains || []
 //     let time = "9:40"
- const something = this.handleSubmit()
+let inputTime = this.state.time
+ const something = this.findMatchArrivalTime(inputTime)
 // console.log("something here: ",something)
  const inputTimeDirection = '(follow 24hours format. example: 21:30)'
     return(
       <div>
         <div>
           <form>
-            <label id='find-time' onSubmit={this.handleSubmit}>
+            <label id='find-time'>
                Find next time that has mutiple trains come at the same time?
                <br/>
                Put in your time:
                {this.state.time.length>5 || this.state.time.length <5 && inputTimeDirection && <span className="warning">{inputTimeDirection}</span>}
               <input type="text" name="time" value ={this.state.time} onChange={this.handleChange}/>
             </label>
-            {/* <button type="submit"  disabled={!this.state.time || this.state.time.length > 5 || this.state.time.length < 5 }>Find time</button> */}
+           
           </form>
 
           {this.state.time ? <h1>{something}</h1> : null}
