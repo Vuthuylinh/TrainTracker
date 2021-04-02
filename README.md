@@ -1,4 +1,15 @@
 # Train Tracker at TOMO Station
+
+## Introduction:
+  - A mean for clients to post a schedule a new train line with  constraints:
+      - Name up to 4 characters (i.e. ‘LINH’, 'No1')
+      - Specific to the minute the train arrive (i.e. ‘9:53 PM’)
+  - A mean for clients to find the next time has mutiple trains arrive at the same time:
+      - Specific time if current day still has remain time
+      - Specific time of the first time available the next day if current day doesn't has remain time
+      - No time if there are not time availble
+  - A mean for clients to delete a train line schedule
+## Demo
 Youtube video:
 
 ## Getting started
@@ -18,4 +29,3 @@ Youtube video:
  - Express
  - Sequelize
  - PostgreSQL
-
