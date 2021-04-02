@@ -48,11 +48,9 @@ findMatchArrivalTime(time) {
 if(matchTimes.length===0) return "There are no trains come at the same time"
 
 const converseOutputTime =(time)=>{
-  let firstE = time[0]
-  let secondE = time[1]
-  let hour = parseInt(firstE +secondE)
+  let hour = parseInt(time.slice(0,2))
   if(hour<12){
-    return time +" AM"
+    return time + " AM"
   }
 
   if(hour ===12){
@@ -61,7 +59,7 @@ const converseOutputTime =(time)=>{
   if(hour>12){
     let newHour = hour-12
     let minutes = time.slice(2)
-    return newHour+minutes +' PM'
+    return newHour+minutes + " PM"
   }
 }
 
@@ -83,6 +81,9 @@ const outputTime = this.findMatchArrivalTime(inputTime)
 const inputTimeDirection = '(24hours format, example: 21:30)'
     return(
       <div>
+        <div>
+          <h1>Welcome to TOMO Station!</h1>
+        </div>
         <div>
           <form>
             <label id='find-time'>
@@ -107,7 +108,7 @@ const inputTimeDirection = '(24hours format, example: 21:30)'
               {this.state.clicked ?  <CreateTrainSchedule addTrainToState ={this.props.addTrain} /> : null}
         </div>
         <div>
-          <h1>Trains list</h1>
+          <h2>Trains arrive at ToMo station </h2>
           {
             trains.map(train =><Train train={train} key={train.id} deleteTrain={this.props.deleteTrain}/>)
           }
