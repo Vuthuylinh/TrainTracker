@@ -27,7 +27,12 @@ img {
 
 button {
   margin: 1em;
-  background-color: #b6d5cd;
+  background-color: #10567e;
+  color:white
+}
+
+form button:disabled {
+  background-color: #ccc;
 }
 
 #remove{
@@ -49,7 +54,6 @@ button {
 }
 
 .train {
-  border: blue dotted;
   display: flex;
   justify-content: space-around;
   align-items: space-around;

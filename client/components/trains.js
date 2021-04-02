@@ -81,34 +81,37 @@ const outputTime = this.findMatchArrivalTime(inputTime)
 const inputTimeDirection = '(24hours format, example: 21:30)'
     return(
       <div>
-        <div>
+        <div id='header'>
           <h1>Welcome to TOMO Station!</h1>
         </div>
         <div>
-          <form>
-            <label id='find-time'>
-               Find next time that has mutiple trains come at the same time?
-               <br/>
-               Put in your time:
-               {this.state.time.length>5 || this.state.time.length <5 && inputTimeDirection && <span className="warning">{inputTimeDirection}</span>}
-              <input type="text" name="time" value ={this.state.time} onChange={this.handleChange}/>
-            </label>
+          <div>
+            <form>
+              <label id='find-time'>
+                Find next time that has mutiple trains come at the same time?
+                <br/>
+                Put in your time:
+                {this.state.time.length>5 || this.state.time.length <5 && inputTimeDirection && <span className="warning">{inputTimeDirection}</span>}
+                <input type="text" name="time" value ={this.state.time} onChange={this.handleChange}/>
+              </label>
 
-          </form>
+            </form>
+          </div>
+          <div>
+            {this.state.time ?
+            (<div>
+              <h3>Next time you see mutiple trains arrive at the same time:  {outputTime} </h3>
 
-          {this.state.time ?
-          (<div>
-            <h3>Next time you see mutiple trains arrive at the same time:  {outputTime} </h3>
-
-          </div>)
-           : null}
+            </div>)
+            : null}
+          </div>
         </div>
         <div className="create-button">
               <button type="button" id="add-schelude" onClick={this.handleClick} > Add Train Schedule </button>
               {this.state.clicked ?  <CreateTrainSchedule addTrainToState ={this.props.addTrain} /> : null}
         </div>
-        <div>
-          <h2>Trains arrive at ToMo station </h2>
+        <h2>Trains arrive at TOMO station </h2>
+        <div id ='trains-container'>
           {
             trains.map(train =><Train train={train} key={train.id} deleteTrain={this.props.deleteTrain}/>)
           }
