@@ -10,12 +10,15 @@
       - No time if there are not time availble
   - A mean for clients to delete a train line schedule
 ## Demo
-Youtube video: https://youtu.be/A-K6PpscsZ8
+- Please click the picture to watch demo
+[![demo](./public/screenShot.png)](https://www.youtube.com/watch?v=A34RrIrLf1M "demo")
+
+- Or you watch on Youtube : https://youtu.be/A-K6PpscsZ8
 
 ## Getting started
 
 1. Fork and clone this repo.
-2. `npm install`.
+2. Run `npm install`.
 3. Create `train-tracker` and `train-tracker-test` databases on PostgreSQL database.
 4. Check out the starting seed file in `seed.js` - you can run it by executing `npm run seed`
 5. Start the build process and your application with: `npm run start-dev`. If you're using Windows, you may need to execute `npm run start-server` and `npm run build-watch` separately (in their own terminal tabs).
