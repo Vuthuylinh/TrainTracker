@@ -13,7 +13,7 @@ const Train =(props)=>{
       <img src={train.imageUrl}/>
       <div className= "column">
           {
-          <button type="button" className= "remove" onClick={() => deleteTrain(train)}> Delete</button>
+          <button type="button" id= "remove" onClick={() => deleteTrain(train)}> Delete</button>
         }
       </div>
     </div>

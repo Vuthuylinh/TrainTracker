@@ -25,7 +25,7 @@ const defaultState = {
      this.setState(defaultState)
    } catch (err){
      this.setState({
-       errorMessage: `There was a problem creating the project: ${err.message}`
+       errorMessage: `There was a problem adding a train schedule: ${err.message}`
      })
    }
    }
@@ -35,7 +35,7 @@ const defaultState = {
      })
    }
    render() {
-    const warningMessage = ' (Name must has maximun 4 characters)';
+    const warningMessage = '(Name has maximun 4 characters)';
      return (
       <form id="schedule-form" onSubmit={this.handleSubmit}>
       <label htmlFor="trainName"> Train name:

@@ -47,22 +47,40 @@ findMatchArrivalTime(time) {
 }
 if(matchTimes.length===0) return "There are no trains come at the same time"
 
+const converseOutputTime =(time)=>{
+  let firstE = time[0]
+  let secondE = time[1]
+  let hour = parseInt(firstE +secondE)
+  if(hour<12){
+    return time +" AM"
+  }
+
+  if(hour ===12){
+    return time + " PM"
+  }
+  if(hour>12){
+    let newHour = hour-12
+    let minutes = time.slice(2)
+    return newHour+minutes +' PM'
+  }
+}
+
+
 for(let j=0; j<matchTimes.length; j++){
   console.log("match time:",matchTimes)
   if(matchTimes[j]> time){
-    return "Today : " + matchTimes[j]
+    return "Today - " + converseOutputTime(matchTimes[j])
   }
 }
-return "Tomorrow : " + matchTimes[0]
+return "Tomorrow - " + converseOutputTime(matchTimes[0])
 }
 
 render(){
 const trains = this.props.trains || []
-//     let time = "9:40"
+console.log("trains: ", trains)
 let inputTime = this.state.time
- const something = this.findMatchArrivalTime(inputTime)
-// console.log("something here: ",something)
- const inputTimeDirection = '(follow 24hours format. example: 21:30)'
+const outputTime = this.findMatchArrivalTime(inputTime)
+const inputTimeDirection = '(24hours format, example: 21:30)'
     return(
       <div>
         <div>
@@ -77,7 +95,12 @@ let inputTime = this.state.time
 
           </form>
 
-          {this.state.time ? <h1>{something}</h1> : null}
+          {this.state.time ?
+          (<div>
+            <h3>Next time you see mutiple trains arrive at the same time:  {outputTime} </h3>
+
+          </div>)
+           : null}
         </div>
         <div className="create-button">
               <button type="button" id="add-schelude" onClick={this.handleClick} > Add Train Schedule </button>
